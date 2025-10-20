@@ -6,7 +6,11 @@ class ChatPage extends StatefulWidget {
   final String chatName;
   final String nickname;
   final String userId;
-  const ChatPage({super.key, required this.chatName, required this.nickname, required this.userId});
+  const ChatPage(
+      {super.key,
+      required this.chatName,
+      required this.nickname,
+      required this.userId});
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -21,9 +25,21 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.chatName),
+          backgroundColor: Color(0xFFF5F5F5),
+          centerTitle: true,
+          title: Text(
+            widget.chatName,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          bottom: PreferredSize(
+              preferredSize: Size.fromHeight(1),
+              child: Container(
+                color: Colors.grey.shade600,
+                height: 0.5,
+              )),
         ),
         body: Container(
+          margin: EdgeInsets.only(top: 8),
           child: Column(children: [
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
@@ -58,7 +74,8 @@ class _ChatPageState extends State<ChatPage> {
                           margin:
                               EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                           decoration: BoxDecoration(
-                            color: myMsg ? Colors.blueAccent : Colors.grey[300],
+                            color:
+                                myMsg ? Color(0xFF33A7FE) : Color(0xFFE9E9EB),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Column(
@@ -97,46 +114,49 @@ class _ChatPageState extends State<ChatPage> {
                     child: TextField(
                       controller: messagemController,
                       decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.grey[400],
+                        hintText: "Mensagem de Texto",
+                        hintStyle: TextStyle(color: Colors.grey.shade500),
                         contentPadding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25),
                           borderSide: BorderSide(color: Colors.grey),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide.none,
+                          borderSide: BorderSide(color: Color(0xFF989898)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide.none,
+                          borderSide: BorderSide(color: Color(0xFF989898)),
                         ),
                       ),
                       style: TextStyle(fontSize: 14),
                     ),
                   ),
                   const SizedBox(width: 8),
-                  IconButton(
-                    onPressed: () async {
-                      if (messagemController.text.trim().isEmpty) return;
+                  CircleAvatar(
+                    backgroundColor: Color(0xFF33C758),
+                    child: IconButton(
+                      onPressed: () async {
+                        if (messagemController.text.trim().isEmpty) return;
 
-                    final msg = Mensagem(
-                      text: messagemController.text.trim(),
-                      userId: widget.userId,
-                      nickname: widget.nickname,
-                    );
+                        final msg = Mensagem(
+                          text: messagemController.text.trim(),
+                          userId: widget.userId,
+                          nickname: widget.nickname,
+                        );
 
-                    await db
-                        .collection('salas')
-                        .doc(widget.chatName)
-                        .collection('mensagens')
-                        .add(msg.toJson());
+                        await db
+                            .collection('salas')
+                            .doc(widget.chatName)
+                            .collection('mensagens')
+                            .add(msg.toJson());
 
-                    messagemController.clear();
-                    },
-                    icon: Icon(Icons.send, color: Colors.grey),
+                        messagemController.clear();
+                      },
+                      icon: Icon(Icons.arrow_upward, color: Colors.white),
+                    ),
                   ),
                 ],
               ),
