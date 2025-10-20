@@ -12,4 +12,3 @@ void main() async {
   runApp(const MyApp());
 }
 
-//Quando for jogar no git, lembrar de ignorar o arquivo firebase.json
