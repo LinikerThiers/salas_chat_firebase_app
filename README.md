@@ -1,8 +1,8 @@
 
 # salas_chat_firebase_app
 
-Um app de chat construído com Flutter + Firebase (iOS, Android, Web)
-Este repositório contém o código-fonte de um aplicativo de salas de chat (chat rooms) que utiliza Firebase para backend (autenticação, banco de dados, possivelmente armazenamento).
+Um app de chat construído com Flutter + Firebase (iOS, Android)
+Este repositório contém o código-fonte de um aplicativo de salas de chat (chat rooms) que utiliza Firebase para backend (banco de dados, armazenamento).
 
 <img src="https://github.com/user-attachments/assets/738e08e2-6e71-4dcf-8bfe-0b1dce5f661f" width=140>
 <img src="https://github.com/user-attachments/assets/21b8a5ba-acd5-43db-b2d6-708903578222" width=140>
